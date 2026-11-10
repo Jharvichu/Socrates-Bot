@@ -1,0 +1,475 @@
+/* Hoja de estilos accesible y adaptable para Socrates Bot */
+
+:root {
+  --bg-primary: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-panel: #f1f5f9;
+  --text-main: #0f172a;
+  --text-muted: #334155;
+  --border-color: #cbd5e1;
+  --primary-color: #1e3a8a;
+  --primary-hover: #172554;
+  --accent-color: #0369a1;
+  --success-color: #15803d;
+  --warning-color: #b45309;
+  --danger-color: #b91c1c;
+  --focus-ring: #0284c7;
+  --font-base: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-mono: "Courier New", Courier, monospace;
+}
+
+/* Modo alto contraste accesible */
+body.high-contrast {
+  --bg-primary: #000000;
+  --bg-card: #121212;
+  --bg-panel: #1e1e1e;
+  --text-main: #ffffff;
+  --text-muted: #e2e8f0;
+  --border-color: #ffffff;
+  --primary-color: #facc15;
+  --primary-hover: #eab308;
+  --accent-color: #38bdf8;
+  --success-color: #4ade80;
+  --danger-color: #f87171;
+  --focus-ring: #facc15;
+}
+
+body.large-font {
+  font-size: 1.2rem;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-base);
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Enfoque visible universal para navegacion por teclado */
+:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+/* Barra superior accesible */
+.navbar {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.brand-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+}
+
+.nav-btn {
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 0.5rem 0.85rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  min-height: 44px;
+}
+
+.nav-btn:hover, .nav-btn.active {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #ffffff;
+}
+
+/* Indicador de estado de voz y conectividad */
+.status-bar {
+  background-color: var(--bg-panel);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0.5rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.voice-badge {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  font-weight: 600;
+  background-color: #e2e8f0;
+  color: #0f172a;
+}
+
+.voice-badge.listening {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+/* Contenedor principal de pantallas */
+.main-content {
+  flex: 1;
+  max-width: 1300px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1.25rem;
+}
+
+.screen-view {
+  display: none;
+}
+
+.screen-view.active {
+  display: block;
+}
+
+/* Estilos de tarjetas y secciones */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+}
+
+/* Botones principales y accesibles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1.1rem;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  min-height: 44px;
+  min-width: 44px;
+  text-decoration: none;
+  background-color: var(--primary-color);
+  color: #ffffff;
+}
+
+.btn:hover {
+  background-color: var(--primary-hover);
+}
+
+.btn-secondary {
+  background-color: #ffffff;
+  color: var(--text-main);
+  border-color: var(--border-color);
+}
+
+.btn-success {
+  background-color: var(--success-color);
+  color: #ffffff;
+}
+
+.btn-accent {
+  background-color: var(--accent-color);
+  color: #ffffff;
+}
+
+/* Pantalla P1: Calibracion de accesibilidad */
+.grid-2col {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.form-select, .form-input {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--bg-card);
+  color: var(--text-main);
+  font-size: 1rem;
+  min-height: 44px;
+}
+
+/* Pantalla P2: Arbol de habilidades */
+.topics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.topic-node {
+  border: 2px solid var(--border-color);
+  border-radius: 6px;
+  padding: 1rem;
+  background: var(--bg-card);
+  cursor: pointer;
+}
+
+.topic-node.active {
+  border-color: var(--primary-color);
+  background: #eff6ff;
+}
+
+.topic-node.solved {
+  border-color: var(--success-color);
+}
+
+/* Pantalla P3: Workspace Dual-Modal */
+.dual-workspace {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 900px) {
+  .dual-workspace {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pet-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.pet-card {
+  text-align: center;
+  padding: 1rem;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+}
+
+.pet-image {
+  max-width: 180px;
+  height: auto;
+  margin: 0.5rem auto;
+  border-radius: 6px;
+  display: block;
+}
+
+.socratic-chat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 1rem;
+  max-height: 280px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.chat-bubble {
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  max-width: 90%;
+  font-size: 0.95rem;
+}
+
+.chat-bubble.socrates {
+  background: #e0f2fe;
+  color: #0369a1;
+  align-self: flex-start;
+  border-left: 4px solid #0284c7;
+}
+
+.chat-bubble.user {
+  background: #f1f5f9;
+  color: #0f172a;
+  align-self: flex-end;
+}
+
+/* Editor de codigo en P3 */
+.code-editor-area {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.code-textarea {
+  width: 100%;
+  height: 240px;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  padding: 0.75rem;
+  background: #0f172a;
+  color: #f8fafc;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  resize: vertical;
+  line-height: 1.4;
+}
+
+.console-output {
+  background: #1e293b;
+  color: #f1f5f9;
+  padding: 0.75rem;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  min-height: 90px;
+  white-space: pre-wrap;
+  border: 1px solid #334155;
+}
+
+.editor-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Barra inferior permanente de comandos de voz */
+.voice-command-bar {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.voice-command-tag {
+  display: inline-block;
+  background: #e2e8f0;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  margin: 0.2rem;
+  font-family: var(--font-mono);
+}
+
+/* Pantalla P4: Santuario de Mascota */
+.stages-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.stage-card {
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 0.75rem;
+  text-align: center;
+  background: var(--bg-card);
+}
+
+.stage-card.current {
+  border: 2px solid var(--success-color);
+  background: #f0fdf4;
+}
+
+.stage-card img {
+  max-width: 130px;
+  height: auto;
+  margin-bottom: 0.5rem;
+}
+
+/* Pantalla P5: Sala Colaborativa */
+.room-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 800px) {
+  .room-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.participants-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.participant-item {
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Pantalla P6: Dashboard Docente */
+.metrics-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.metric-box {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  padding: 1rem;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.metric-number {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.data-table th, .data-table td {
+  border: 1px solid var(--border-color);
+  padding: 0.6rem 0.85rem;
+  text-align: left;
+}
+
+.data-table th {
+  background-color: var(--bg-panel);
+  font-weight: 700;
+}
+
+

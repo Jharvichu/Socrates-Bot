@@ -1,0 +1,18 @@
+{
+  "name": "Socrates Bot - Aprendizaje Socratico de Python",
+  "short_name": "SocratesBot",
+  "description": "Asistente web interactivo con interfaz de voz y mascota virtual para aprender Python",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#1e3a8a",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/static/img/mascota/aprendiz.png",
+      "sizes": "400x400",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
