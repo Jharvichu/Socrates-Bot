@@ -1,0 +1,163 @@
+{
+  "exercises": [
+    {
+      "id": "ej-01",
+      "number": 1,
+      "title": "Variables y Presentacion",
+      "topic": "variables",
+      "difficulty": "Inicial",
+      "points": 15,
+      "prompt": "Crea una variable llamada nombre con tu nombre y luego usa print para mostrar un saludo en pantalla.",
+      "initial_code": "# Declara tu variable nombre aqui abajo\n\n# Muestra el saludo con print\n",
+      "solution_concept": "Definir nombre = 'Carlos' y luego print('Hola', nombre)",
+      "test_keyword": "print"
+    },
+    {
+      "id": "ej-02",
+      "number": 2,
+      "title": "Calculo de Suma Sencilla",
+      "topic": "variables",
+      "difficulty": "Inicial",
+      "points": 15,
+      "prompt": "Asigna dos numeros a las variables a y b. Luego calcula su suma y muestrala con print.",
+      "initial_code": "a = 15\nb = 25\n# Calcula la suma e imprimela\n",
+      "solution_concept": "suma = a + b seguido de print(suma)",
+      "test_keyword": "+"
+    },
+    {
+      "id": "ej-03",
+      "number": 3,
+      "title": "Decisiones con Condicional If",
+      "topic": "condicionales",
+      "difficulty": "Intermedio",
+      "points": 25,
+      "prompt": "Dada la variable edad = 20, escribe una condicion if para imprimir 'Mayor de edad' si es mayor o igual a 18, o 'Menor de edad' en caso contrario.",
+      "initial_code": "edad = 20\n# Escribe aqui tu estructura if / else\n",
+      "solution_concept": "if edad >= 18: print('Mayor de edad') else: print('Menor de edad')",
+      "test_keyword": "if"
+    },
+    {
+      "id": "ej-04",
+      "number": 4,
+      "title": "Control de Semaforo",
+      "topic": "condicionales",
+      "difficulty": "Intermedio",
+      "points": 25,
+      "prompt": "Dada la variable color = 'verde', usa if y elif para imprimir 'Avanzar' si es verde, 'Precaucion' si es amarillo y 'Detenerse' si es rojo.",
+      "initial_code": "color = 'verde'\n# Estructura de semaforo con if y elif\n",
+      "solution_concept": "if color == 'verde': print('Avanzar') elif ...",
+      "test_keyword": "elif"
+    },
+    {
+      "id": "ej-05",
+      "number": 5,
+      "title": "Conteo con Bucle For",
+      "topic": "bucles",
+      "difficulty": "Avanzado",
+      "points": 35,
+      "prompt": "Escribe un bucle for que recorra un rango del 1 al 5 e imprima cada numero en una linea distinta.",
+      "initial_code": "# Usa for y range para imprimir del 1 al 5\n",
+      "solution_concept": "for i in range(1, 6): print(i)",
+      "test_keyword": "for"
+    },
+    {
+      "id": "ej-06",
+      "number": 6,
+      "title": "Suma de Elementos en una Lista",
+      "topic": "bucles",
+      "difficulty": "Avanzado",
+      "points": 35,
+      "prompt": "Dada la lista valores = [5, 10, 15, 20], usa un bucle for para acumular el total y muestralo al final.",
+      "initial_code": "valores = [5, 10, 15, 20]\ntotal = 0\n# Acumula los valores en la variable total\n\nprint('Total:', total)\n",
+      "solution_concept": "for v in valores: total += v",
+      "test_keyword": "total"
+    },
+    {
+      "id": "ej-07",
+      "number": 7,
+      "title": "Definicion de Funcion Cuadrado",
+      "topic": "funciones",
+      "difficulty": "Maestria",
+      "points": 45,
+      "prompt": "Define una funcion llamada calcular_cuadrado(numero) que retorne el valor elevado al cuadrado usando el operador ** o multiplicando por si mismo.",
+      "initial_code": "# Define tu funcion calcular_cuadrado aqui\n\n\n# Prueba la funcion llamandola con el numero 4\nresultado = calcular_cuadrado(4)\nprint('El cuadrado es:', resultado)\n",
+      "solution_concept": "def calcular_cuadrado(numero): return numero * numero",
+      "test_keyword": "def"
+    },
+    {
+      "id": "ej-08",
+      "number": 8,
+      "title": "Funcion de Calculo de Promedio",
+      "topic": "funciones",
+      "difficulty": "Maestria",
+      "points": 45,
+      "prompt": "Define una funcion llamada obtener_promedio(notas) que reciba una lista de numeros y devuelva el promedio.",
+      "initial_code": "# Define obtener_promedio(notas)\n\n\nmis_notas = [14, 16, 18]\nprint('Promedio:', obtener_promedio(mis_notas))\n",
+      "solution_concept": "def obtener_promedio(notas): return sum(notas) / len(notas)",
+      "test_keyword": "return"
+    }
+  ],
+  "classroom_analytics": {
+    "total_students_enrolled": 32,
+    "active_now": 6,
+    "group_average_points": 68.5,
+    "students": [
+      {
+        "id": "alu-01",
+        "name": "Maria Rodriguez",
+        "completed_count": 6,
+        "points": 115,
+        "pet_stage": "senior",
+        "status": "avanzando",
+        "current_block": "ninguno",
+        "recent_emotion": "entusiasmado"
+      },
+      {
+        "id": "alu-02",
+        "name": "Juan Perez",
+        "completed_count": 2,
+        "points": 30,
+        "pet_stage": "aprendiz",
+        "status": "en_riesgo",
+        "current_block": "condicionales",
+        "recent_emotion": "frustrado"
+      },
+      {
+        "id": "alu-03",
+        "name": "Ana Quispe",
+        "completed_count": 5,
+        "points": 95,
+        "pet_stage": "junior",
+        "status": "avanzando",
+        "current_block": "bucles",
+        "recent_emotion": "reflexivo"
+      },
+      {
+        "id": "alu-04",
+        "name": "Carlos Gomez",
+        "completed_count": 1,
+        "points": 15,
+        "pet_stage": "huevo",
+        "status": "en_riesgo",
+        "current_block": "variables",
+        "recent_emotion": "frustrado"
+      },
+      {
+        "id": "alu-05",
+        "name": "Lucia Fernandez",
+        "completed_count": 8,
+        "points": 155,
+        "pet_stage": "sabio",
+        "status": "destacado",
+        "current_block": "ninguno",
+        "recent_emotion": "entusiasmado"
+      }
+    ],
+    "topic_error_heatmap": {
+      "variables": 12,
+      "condicionales": 28,
+      "bucles": 45,
+      "funciones": 38
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "default_user": {
+    "user_id": "default_user",
+    "display_name": "Estudiante Explorador",
+    "profile_type": "estandar",
+    "accessibility": {
+      "screen_reader_optimized": false,
+      "hands_free_voice": true,
+      "high_contrast": false,
+      "tts_speed": 1.0,
+      "font_scale": 1.0
+    },
+    "progress": {
+      "points": 30,
+      "exercises_solved": [
+        "ej-01",
+        "ej-02"
+      ],
+      "consecutive_errors": 1,
+      "total_attempts": 20,
+      "errors_by_topic": {
+        "variables": 3,
+        "condicionales": 0,
+        "bucles": 0,
+        "funciones": 0
+      }
+    },
+    "affective_state": {
+      "inferred_emotion": "reflexivo",
+      "frustration_level": 35,
+      "motivation_level": 90
+    },
+    "pet_stage": "aprendiz"
+  }
+}
