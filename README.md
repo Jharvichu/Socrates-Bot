@@ -1,77 +1,79 @@
-# Sócrates Bot
+# Socrates Bot
 
-Asistente web interactivo con interfaz de voz y mascota virtual para el aprendizaje guiado de programación en Python.
+Asistente web interactivo con interfaz de voz y mascota virtual para el aprendizaje guiado de programacion en Python.
 
-Proyecto desarrollado para el curso de Interacción Humano-Computador (CC451).
+Proyecto desarrollado para el curso de Interaccion Humano-Computador (CC451).
 
+## Integrantes del Grupo 1
+1. Luis Alanya Campos
+2. Jharvy Cadillo Tarazona
+3. Pedro Vargas Alfaro
 
+## Descripcion general
+Socrates Bot es una Aplicacion Web Progresiva (PWA) pensada para estudiantes que inician en la programacion en Python, facilitando ademas el acceso a personas con discapacidad motora o visual.
 
-## Descripción general
+En lugar de entregar el codigo resuelto, el sistema plantea un metodo socratico guiado por voz: hace preguntas de orientacion para que el alumno descubra la solucion por su cuenta, relacionando el avance con el cuidado y evolucion de una mascota virtual (un pinguino).
 
-Sócrates Bot es una propuesta de Aplicación Web Progresiva (PWA) pensada para estudiantes que inician en la programación en Python, facilitando además el acceso a personas con discapacidad motora o visual.
+## Estado actual del proyecto (Avance al 70% - PC03)
+El proyecto se encuentra en la etapa de prototipo funcional al 70%, con codigo modular implementado y probado:
 
-En lugar de dar el código ya hecho, el sistema plantea un método socrático guiado por voz: hace preguntas de orientación para que el alumno descubra la solución por su cuenta, relacionando el avance con el cuidado y evolución de una mascota virtual.
+* Interfaz de voz manos libres y lectura en voz alta (TTS) mediante Web Speech API.
+* Capa de abstraccion de inteligencia artificial con soporte para la API de Groq (Llama 3.3) y conmutacion automatica a modo local heuristico.
+* Mascota virtual evolutiva (Pinguino) en 5 etapas: Huevo, Aprendiz, Junior, Senior y Sabio, con diseno emocional de Norman.
+* Laboratorio socratico con editor de codigo Python y sandbox de ejecucion aislada con limite de 2.0 segundos.
+* Perfil de usuario persistente con adaptacion continua segun ritmo, errores e inferencia de estado afectivo.
+* Salas colaborativas multiusuario mediante WebSockets en tiempo real.
+* Plataforma PWA adaptable a pantallas de computadoras y telefonos moviles.
 
+## Estructura del proyecto
+* app/socratic_tutor.py: Capa de abstraccion LLM para Groq API y conmutador local.
+* app/code_sandbox.py: Entorno seguro de ejecucion de codigo con timeout de 2.0 s.
+* app/pet_manager.py: Motor de evolucion y diseno emocional del pinguino.
+* app/user_profile.py: Motor de personalizacion continua del estudiante.
+* app/rooms_manager.py: Administrador de salas colaborativas con WebSockets.
+* static/img/mascota/: Carpeta con las imagenes de las 5 fases del pinguino (huevo.png, aprendiz.png, junior.png, senior.png, sabio.png).
+* templates/index.html: Interfaz web accesible con las 6 pantallas del flujo (P1 a P6).
+* data/simulated_data.json: Retos de Python y datos simulados para analitica docente.
+* docs/Reporte_Avance_PC03_SocratesBot.docx: Reporte formal de avance de la PC03 en formato Word.
 
+## Instrucciones de instalacion y ejecucion
 
-## Estado actual del proyecto
+### 1. Clonar el repositorio y entrar a la carpeta
+```bash
+git clone https://github.com/Jharvichu/Socrates-Bot
+cd Socrates-Bot
+```
 
-El proyecto se encuentra en la fase inicial de planificación, definición de requerimientos y diseño de interacción (Práctica Calificada 02). No hay código funcional todavía. El trabajo actual abarca el análisis de usuarios (stakeholders), marco PACT, requerimientos funcionales y no funcionales, historias de usuario y los bocetos de alternativas de diseño.
+### 2. Instalar dependencias
+```bash
+pip install -r requirements.txt
+```
 
+### 3. Configurar la clave de Groq API (Opcional)
+Copia el archivo de ejemplo y agrega tu clave obtenida en console.groq.com/keys:
+```bash
+cp .env.example .env
+```
+Edita el archivo .env con tu editor favorito:
+```text
+GROQ_API_KEY=tu_clave_de_groq_aqui
+```
+Si no configuras la clave, Socrates Bot funcionara automaticamente con su motor socratico local de respaldo.
 
+### 4. Iniciar el servidor
+```bash
+python3 main.py
+```
+O usando uvicorn directamente:
+```bash
+uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+```
 
-## Características principales planificadas
-
-* Navegación y dictado de código por voz, pensado para usarse completamente sin teclado ni ratón.
-
-
-* Narración de respuestas y código por voz, compatible con lectores de pantalla.
-
-
-* Asistencia mediante preguntas guía en lugar de entregar la respuesta directa.
-
-
-* Conexión a modelos de lenguaje remotos con cambio a un modelo local si falla la red.
-
-
-* Mascota virtual interactiva que acompaña el progreso y ayuda a reducir la frustración.
-
-
-* Funcionamiento como PWA con soporte básico sin conexión.
-
-
-* Salas para trabajo colaborativo entre estudiantes.
-
-
-* Panel para que los docentes sigan el avance del grupo.
-
-
-
-
-
-## Arquitectura
-
-El diseño del sistema se apoya en el modelo C4 (diagramas de contexto y contenedores) para mostrar cómo se comunicarán la interfaz web, el backend, el evaluador de código y los modelos de lenguaje.
-
-Los diagramas y la documentación correspondiente se encuentran en la carpeta:
-
-* `docs/`
-
-
-
-## Datos simulados
-
-Para cumplir con lo solicitado en la evaluación y permitir la revisión del flujo propuesto sin necesidad del backend terminado, se incluyen archivos de datos simulados (ejemplos de ejercicios, respuestas del asistente y estados de prueba).
-
-
-
-## Guía de instalación (A futuro)
-
-El sistema se encuentra en fase de diseño y definición de requisitos, por lo que todavía no cuenta con una versión ejecutable.
-
-Las instrucciones de instalación, dependencias y comandos de ejecución se añadirán en las siguientes etapas del proyecto, una vez que comience la fase de construcción y programación del software.
-
+### 5. Abrir en el navegador
+Ingresa a:
+```text
+http://localhost:8000
+```
 
 ## Licencia
-
-Este proyecto cuenta con licencia abierta MIT. Para más información, revisar el archivo `LICENSE` en la raíz del repositorio.
+Este proyecto cuenta con licencia abierta MIT. Para mas informacion, revisar el archivo LICENSE en la raiz del repositorio.
