@@ -1,5 +1,12 @@
 // Controlador principal de la aplicacion Socrates Bot
 
+// Etiquetas legibles para los estados del dashboard docente
+const STATUS_LABELS = {
+  avanzando: "Avanzando",
+  en_riesgo: "En riesgo",
+  destacado: "Destacado"
+};
+
 class SocratesApp {
   constructor() {
     this.currentScreen = "screen-p1";
@@ -8,6 +15,7 @@ class SocratesApp {
     this.consecutiveErrors = 0;
     this.userProfile = null;
     this.socket = null;
+    this.screenHistory = [];
     this.init();
   }
 
@@ -72,15 +80,21 @@ class SocratesApp {
   }
 
   // Navegacion entre pantallas P1 a P6
-  navigateTo(screenId) {
+  navigateTo(screenId, options = {}) {
+    const target = document.getElementById(screenId);
+    if (!target) return;
+
+    // Historial para el comando de voz "volver"
+    if (!options.fromHistory && screenId !== this.currentScreen) {
+      this.screenHistory.push(this.currentScreen);
+      if (this.screenHistory.length > 20) this.screenHistory.shift();
+    }
+
     document.querySelectorAll(".screen-view").forEach((view) => {
       view.classList.remove("active");
     });
-    const target = document.getElementById(screenId);
-    if (target) {
-      target.classList.add("active");
-      this.currentScreen = screenId;
-    }
+    target.classList.add("active");
+    this.currentScreen = screenId;
 
     // Actualiza botones de navegacion activos
     document.querySelectorAll(".nav-btn").forEach((btn) => {
@@ -91,16 +105,25 @@ class SocratesApp {
       }
     });
 
-    if (screenId === "screen-p5") {
-      this.connectCollaborativeRoom("sala-1");
-    } else if (this.socket) {
+    if (this.socket) {
       this.socket.close();
       this.socket = null;
+    }
+    if (screenId === "screen-p5") {
+      this.connectCollaborativeRoom(options.roomId || "sala-1");
     }
 
     if (screenId === "screen-p6") {
       this.loadDashboardData();
     }
+  }
+
+  // Regresa a la pantalla anterior; devuelve false si no hay historial
+  goBack() {
+    const previous = this.screenHistory.pop();
+    if (!previous) return false;
+    this.navigateTo(previous, { fromHistory: true });
+    return true;
   }
 
   bindNavigationEvents() {
@@ -171,7 +194,7 @@ class SocratesApp {
             })
           });
           if (window.voiceInterface) {
-            window.voiceInterface.speak("Calibracion guardada correctamente. Vamos al mapa.");
+            window.voiceInterface.speak("Calibración guardada correctamente. Vamos al mapa.");
           }
           this.navigateTo("screen-p2");
         } catch (e) {
@@ -243,12 +266,12 @@ class SocratesApp {
       let outputText = "";
 
       if (data.success) {
-        outputText = `Ejecucion exitosa (${data.execution_time}s):\n${data.stdout || "(Sin salida de texto)"}`;
+        outputText = `Ejecución exitosa (${data.execution_time}s):\n${data.stdout || "(Sin salida de texto)"}`;
         consoleEl.textContent = outputText;
         this.consecutiveErrors = 0;
         if (window.voiceInterface) {
           window.voiceInterface.playEarcon("success");
-          window.voiceInterface.speak("Codigo ejecutado con exito.");
+          window.voiceInterface.speak("Código ejecutado con éxito.");
         }
       } else {
         outputText = `Error al ejecutar (${data.execution_time}s):\n${data.stderr || data.stdout}`;
@@ -256,7 +279,7 @@ class SocratesApp {
         this.consecutiveErrors += 1;
         if (window.voiceInterface) {
           window.voiceInterface.playEarcon("error");
-          window.voiceInterface.speak("Se detecto un error. Puedes pedirle una pista a Socrates.");
+          window.voiceInterface.speak("Se detectó un error. Puedes decir: dame una pista.");
         }
       }
 
@@ -271,7 +294,7 @@ class SocratesApp {
       }
 
     } catch (e) {
-      consoleEl.textContent = "Error de conexion con el sandbox: " + e.message;
+      consoleEl.textContent = "Error de conexión con el sandbox: " + e.message;
     }
   }
 
@@ -285,7 +308,7 @@ class SocratesApp {
     const chatBox = document.getElementById("socratic-chat");
     const thinkingBubble = document.createElement("div");
     thinkingBubble.className = "chat-bubble socrates";
-    thinkingBubble.textContent = "Socrates esta analizando tu codigo...";
+    thinkingBubble.textContent = "Sócrates está analizando tu código...";
     chatBox.appendChild(thinkingBubble);
     chatBox.scrollTop = chatBox.scrollHeight;
 
@@ -312,7 +335,7 @@ class SocratesApp {
         window.voiceInterface.speak(data.hint);
       }
     } catch (e) {
-      thinkingBubble.textContent = "Revisa los ultimos cambios de tu codigo paso a paso. Recuerdas que operacion necesitabas realizar primero?";
+      thinkingBubble.textContent = "Revisa los últimos cambios de tu código paso a paso. ¿Recuerdas qué operación necesitabas realizar primero?";
     }
   }
 
@@ -324,11 +347,11 @@ class SocratesApp {
     const petDescText = document.getElementById("workspace-pet-desc");
 
     const stageNames = {
-      "huevo": "Huevo de Pinguino",
-      "aprendiz": "Pinguino Aprendiz",
-      "junior": "Pinguino Junior",
-      "senior": "Pinguino Senior",
-      "sabio": "Pinguino Sabio"
+      "huevo": "Huevo de Pingüino",
+      "aprendiz": "Pingüino Aprendiz",
+      "junior": "Pingüino Junior",
+      "senior": "Pingüino Senior",
+      "sabio": "Pingüino Sabio"
     };
 
     const imgPath = `/static/img/mascota/${stageKey}.png`;
@@ -340,7 +363,7 @@ class SocratesApp {
       petStageText.textContent = stageNames[stageKey] || stageKey;
     }
     if (petData) {
-      if (petMoodText) petMoodText.textContent = `Estado de animo: ${petData.mood}`;
+      if (petMoodText) petMoodText.textContent = `Estado de ánimo: ${petData.mood}`;
       if (petDescText) petDescText.textContent = petData.norman_reflection || petData.description;
     }
 
@@ -376,7 +399,7 @@ class SocratesApp {
         } else if (data.type === "member_joined") {
           this.renderRoomMembers(data.members || []);
           if (window.voiceInterface) {
-            window.voiceInterface.speak(`Un nuevo companero se unio a la sala`);
+            window.voiceInterface.speak("Un nuevo compañero se unió a la sala");
           }
         }
       };
@@ -414,6 +437,10 @@ class SocratesApp {
     });
   }
 
+  capitalize(text) {
+    return text ? String(text).charAt(0).toUpperCase() + String(text).slice(1) : "";
+  }
+
   // Carga datos simulados del Dashboard Docente (P6)
   async loadDashboardData() {
     try {
@@ -429,9 +456,9 @@ class SocratesApp {
               <td>${s.name}</td>
               <td>${s.completed_count}</td>
               <td>${s.points}</td>
-              <td>Pinguino ${s.pet_stage}</td>
-              <td>${s.recent_emotion}</td>
-              <td><strong>${s.status}</strong></td>
+              <td>Pingüino ${this.capitalize(s.pet_stage)}</td>
+              <td>${this.capitalize(s.recent_emotion)}</td>
+              <td><strong>${STATUS_LABELS[s.status] || s.status}</strong></td>
             `;
             tableBody.appendChild(tr);
           });
