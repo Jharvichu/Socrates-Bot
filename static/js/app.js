@@ -380,7 +380,9 @@ class SocratesApp {
   // Conexion WebSocket para salas multiusuario (P5)
   connectCollaborativeRoom(roomId) {
     const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
-    const wsUrl = `${protocol}//${window.location.host}/ws/room/${roomId}`;
+    const petStage = (this.userProfile && this.userProfile.pet_stage) || "huevo";
+    const wsUrl = `${protocol}//${window.location.host}/ws/room/${roomId}?pet_stage=${encodeURIComponent(petStage)}`;
+    const roomNumber = roomId.replace("sala-", "");
 
     try {
       this.socket = new WebSocket(wsUrl);
@@ -391,15 +393,28 @@ class SocratesApp {
 
       this.socket.onmessage = (event) => {
         const data = JSON.parse(event.data);
-        if (data.type === "code_update") {
-          const sharedEditor = document.getElementById("shared-code-editor");
+        const sharedEditor = document.getElementById("shared-code-editor");
+        if (data.type === "welcome") {
+          // Al entrar se recibe el codigo actual de la sala y la lista de participantes
+          this.roomMemberId = data.member.id;
+          if (sharedEditor) sharedEditor.value = data.code || "";
+          this.renderRoomMembers(data.members || []);
+          if (window.voiceInterface) {
+            window.voiceInterface.speak(`Entraste a la sala ${roomNumber} como ${data.member.name}`);
+          }
+        } else if (data.type === "code_update") {
           if (sharedEditor && sharedEditor.value !== data.code) {
             sharedEditor.value = data.code;
           }
         } else if (data.type === "member_joined") {
           this.renderRoomMembers(data.members || []);
           if (window.voiceInterface) {
-            window.voiceInterface.speak("Un nuevo compañero se unió a la sala");
+            window.voiceInterface.speak(`${data.member.name} se unió a la sala`);
+          }
+        } else if (data.type === "member_left") {
+          this.renderRoomMembers(data.members || []);
+          if (window.voiceInterface) {
+            window.voiceInterface.speak(`${data.member.name} salió de la sala`);
           }
         }
       };
@@ -427,12 +442,18 @@ class SocratesApp {
     members.forEach((m) => {
       const li = document.createElement("li");
       li.className = "participant-item";
-      li.innerHTML = `
-        <span><strong>${m.name}</strong> (${m.role})</span>
-        <span style="font-size:0.85rem; background:#e2e8f0; padding:0.2rem 0.5rem; border-radius:3px;">
-          Pingüino ${this.capitalize(m.pet_stage)}
-        </span>
-      `;
+      const isMe = m.id && m.id === this.roomMemberId;
+
+      const who = document.createElement("span");
+      const name = document.createElement("strong");
+      name.textContent = isMe ? `${m.name} (tú)` : m.name;
+      who.append(name, ` (${m.role})`);
+
+      const pet = document.createElement("span");
+      pet.style.cssText = "font-size:0.85rem; background:#e2e8f0; padding:0.2rem 0.5rem; border-radius:3px;";
+      pet.textContent = `Pingüino ${this.capitalize(m.pet_stage)}`;
+
+      li.append(who, pet);
       listEl.appendChild(li);
     });
   }

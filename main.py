@@ -136,10 +136,9 @@ async def dashboard_analytics():
 
 # Endpoint WebSocket para salas colaborativas en tiempo real
 @app.websocket("/ws/room/{room_id}")
-async def room_websocket(websocket: WebSocket, room_id: str):
-    student_name = "Estudiante"
-    pet_stage = "huevo"
-    await room_manager.connect(room_id, websocket, student_name, pet_stage)
+async def room_websocket(websocket: WebSocket, room_id: str, pet_stage: str = "huevo"):
+    # La fase de la mascota llega desde el perfil del cliente (?pet_stage=...); el nombre lo asigna el servidor
+    member = await room_manager.connect(room_id, websocket, pet_stage)
     try:
         while True:
             data = await websocket.receive_json()
@@ -149,13 +148,9 @@ async def room_websocket(websocket: WebSocket, room_id: str):
                 await room_manager.broadcast(room_id, {
                     "type": "code_update",
                     "code": new_code
-                })
+                }, exclude=member["id"])
     except WebSocketDisconnect:
-        room_manager.disconnect(room_id, websocket, student_name)
-        await room_manager.broadcast(room_id, {
-            "type": "member_left",
-            "student_name": student_name
-        })
+        await room_manager.disconnect(room_id, member["id"])
 
 # Ejecucion directa del servidor
 if __name__ == "__main__":
