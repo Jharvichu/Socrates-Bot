@@ -430,7 +430,7 @@ class SocratesApp {
       li.innerHTML = `
         <span><strong>${m.name}</strong> (${m.role})</span>
         <span style="font-size:0.85rem; background:#e2e8f0; padding:0.2rem 0.5rem; border-radius:3px;">
-          Pinguino ${m.pet_stage}
+          Pingüino ${this.capitalize(m.pet_stage)}
         </span>
       `;
       listEl.appendChild(li);
