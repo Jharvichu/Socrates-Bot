@@ -18,23 +18,23 @@ class GroqSocraticProvider(BaseSocraticProvider):
 
     def generate_hint(self, exercise_title: str, exercise_prompt: str, user_code: str, execution_output: str, error_count: int, user_emotion: str) -> str:
         system_instruction = (
-            "Eres Socrates Bot, un tutor afectivo y socrático para estudiantes que inician en Python. "
+            "Eres Sócrates Bot, un tutor afectivo y socrático para estudiantes que inician en Python. "
             "Tu tarea es formular preguntas breves y pistas que guíen al estudiante a descubrir la respuesta por sí mismo. "
-            "REGLA OBLIGATORIA: Nunca entregues la solucion completa en codigo ni hagas spoilers directos. "
-            "Si el usuario tiene errores de sintaxis, hazle notar el simbolo o la sangria que falta. "
-            "Si tiene errores de logica, preguntale que valor toma su variable paso a paso. "
-            "Si el usuario tiene mas de 2 errores seguidos o expresa frustracion, se mas empatico y dale una pista mas especifica pero siempre en forma de pregunta. "
-            "Escribe en texto plano, sin emojis, con frases cortas y faciles de narrar por voz."
+            "REGLA OBLIGATORIA: Nunca entregues la solución completa en código ni hagas spoilers directos. "
+            "Si el usuario tiene errores de sintaxis, hazle notar el símbolo o la sangría que falta. "
+            "Si tiene errores de lógica, pregúntale qué valor toma su variable paso a paso. "
+            "Si el usuario tiene más de 2 errores seguidos o expresa frustración, sé más empático y dale una pista más específica pero siempre en forma de pregunta. "
+            "Escribe en texto plano, sin emojis, con frases cortas y fáciles de narrar por voz. Usa correctamente las tildes y los signos de interrogación del español."
         )
 
         user_content = (
             f"Ejercicio actual: {exercise_title}\n"
-            f"Descripcion del reto: {exercise_prompt}\n"
-            f"Codigo escrito por el estudiante:\n{user_code}\n"
+            f"Descripción del reto: {exercise_prompt}\n"
+            f"Código escrito por el estudiante:\n{user_code}\n"
             f"Salida o error al ejecutar:\n{execution_output}\n"
             f"Cantidad de intentos fallidos consecutivos: {error_count}\n"
             f"Estado emocional detectado: {user_emotion}\n"
-            "Formula tu siguiente pregunta guia o pista socratica:"
+            "Formula tu siguiente pregunta guía o pista socrática:"
         )
 
         headers = {
@@ -66,26 +66,26 @@ class FallbackSocraticProvider(BaseSocraticProvider):
 
         # Deteccion de error de indentacion
         if "indentationerror" in output_lower or "expected an indented block" in output_lower:
-            return "Revisa los espacios al inicio de cada linea dentro de tu bloque. Recuerda que en Python cada bloque necesita cuatro espacios de sangria. Que linea tiene una alineacion diferente?"
+            return "Revisa los espacios al inicio de cada línea dentro de tu bloque. Recuerda que en Python cada bloque necesita cuatro espacios de sangría. ¿Qué línea tiene una alineación diferente?"
 
         # Deteccion de sintaxis de dos puntos o parentesis
         if "syntaxerror" in output_lower:
             if ":" not in user_code and ("if" in code_lower or "for" in code_lower or "while" in code_lower or "def" in code_lower):
-                return "Python necesita un simbolo al final de las cabeceras como if, for o def para saber que empieza un bloque. Recuerdas que signo de puntuacion se usa ahi?"
-            return "El interprete detecto un detalle de sintaxis. Fijate si abriste algun parentesis o comilla que no hayas cerrado todavia."
+                return "Python necesita un símbolo al final de las cabeceras como if, for o def para saber que empieza un bloque. ¿Recuerdas qué signo de puntuación se usa ahí?"
+            return "El intérprete detectó un detalle de sintaxis. Fíjate si abriste algún paréntesis o comilla que no hayas cerrado todavía."
 
         # Deteccion de variables no definidas
         if "nameerror" in output_lower:
-            return "Parece que usaste una variable que todavia no existe o cuyo nombre esta escrito distinto. Cual es la variable mencionada en el mensaje de error y donde la creaste?"
+            return "Parece que usaste una variable que todavía no existe o cuyo nombre está escrito distinto. ¿Cuál es la variable mencionada en el mensaje de error y dónde la creaste?"
 
         # Pista progresiva segun numero de fallos
         if error_count >= 3:
-            return "Tranquilo, equivocarse es parte natural del aprendizaje. Vamos a dividir el reto en una sola accion: cual es el primer dato que necesitas pedir o calcular para este problema?"
+            return "Tranquilo, equivocarse es parte natural del aprendizaje. Vamos a dividir el reto en una sola acción: ¿cuál es el primer dato que necesitas pedir o calcular para este problema?"
 
         if error_count == 2:
-            return "Buen intento. Observa lo que imprime tu codigo frente a lo que pide el reto. Que diferencia encuentras en el resultado actual?"
+            return "Buen intento. Observa lo que imprime tu código frente a lo que pide el reto. ¿Qué diferencia encuentras en el resultado actual?"
 
-        return "Excelente iniciativa al probar tu codigo. Que resultado esperabas obtener en este paso y que te devolvio la ejecucion?"
+        return "Excelente iniciativa al probar tu código. ¿Qué resultado esperabas obtener en este paso y qué te devolvió la ejecución?"
 
 # Enrutador con conmutacion automatica ante fallos
 class SocraticRouter:

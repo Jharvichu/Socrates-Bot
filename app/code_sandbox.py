@@ -19,7 +19,7 @@ def execute_python_code(code: str, timeout_seconds: float = SANDBOX_TIMEOUT_SECO
             return {
                 "success": False,
                 "stdout": "",
-                "stderr": f"Aviso de seguridad: la operacion '{blocked}' no esta permitida en el laboratorio inicial.",
+                "stderr": f"Aviso de seguridad: la operación '{blocked}' no está permitida en el laboratorio inicial.",
                 "execution_time": 0.01,
                 "timed_out": False,
                 "security_blocked": True
@@ -50,7 +50,7 @@ def execute_python_code(code: str, timeout_seconds: float = SANDBOX_TIMEOUT_SECO
         return {
             "success": False,
             "stdout": "",
-            "stderr": f"Tiempo limite excedido ({timeout_seconds} s). Es probable que tu bucle nunca termine.",
+            "stderr": f"Tiempo límite excedido ({timeout_seconds} s). Es probable que tu bucle nunca termine.",
             "execution_time": elapsed,
             "timed_out": True,
             "security_blocked": False
