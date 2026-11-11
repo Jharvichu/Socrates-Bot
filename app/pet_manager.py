@@ -2,53 +2,53 @@
 
 PET_STAGES = {
     "huevo": {
-        "name": "Huevo de Pinguino",
+        "name": "Huevo de Pingüino",
         "stage_level": 1,
         "image_file": "huevo.png",
         "image_path": "/static/img/mascota/huevo.png",
-        "description": "Un huevo con una bufanda azul que reacciona con calor y vibracion cada vez que dictas o pruebas codigo.",
+        "description": "Un huevo con una bufanda azul que reacciona con calor y vibración cada vez que dictas o pruebas código.",
         "required_points": 0,
-        "norman_reflection": "Fase de descubrimiento. Estas empezando tu camino en el mundo de la programacion.",
-        "tts_intro": "Hola, soy tu companero de viaje. Por ahora soy un huevo con muchas ganas de aprender contigo."
+        "norman_reflection": "Fase de descubrimiento. Estás empezando tu camino en el mundo de la programación.",
+        "tts_intro": "Hola, soy tu compañero de viaje. Por ahora soy un huevo con muchas ganas de aprender contigo."
     },
     "aprendiz": {
-        "name": "Pinguino Aprendiz",
+        "name": "Pingüino Aprendiz",
         "stage_level": 2,
         "image_file": "aprendiz.png",
         "image_path": "/static/img/mascota/aprendiz.png",
-        "description": "Un pequeno pinguino bebe con libreta de apuntes que celebra cada variable y condicional resuelto.",
+        "description": "Un pequeño pingüino bebé con libreta de apuntes que celebra cada variable y condicional resuelto.",
         "required_points": 20,
-        "norman_reflection": "Fase de adaptacion. Ya entiendes como la computadora toma decisiones con condicionales.",
-        "tts_intro": "Ya sali del cascaron. Gracias a tus logros ahora puedo caminar y aprender a tu lado."
+        "norman_reflection": "Fase de adaptación. Ya entiendes cómo la computadora toma decisiones con condicionales.",
+        "tts_intro": "Ya salí del cascarón. Gracias a tus logros ahora puedo caminar y aprender a tu lado."
     },
     "junior": {
-        "name": "Pinguino Junior",
+        "name": "Pingüino Junior",
         "stage_level": 3,
         "image_file": "junior.png",
         "image_path": "/static/img/mascota/junior.png",
-        "description": "Un pinguino agil con audifonos que nada con destreza entre bucles y secuencias repetitivas.",
+        "description": "Un pingüino ágil con audífonos que nada con destreza entre bucles y secuencias repetitivas.",
         "required_points": 50,
-        "norman_reflection": "Fase de consolidacion. Has dominado la repeticion y el manejo de colecciones de datos.",
-        "tts_intro": "Mira como creci. Los bucles y las listas ya no nos detienen."
+        "norman_reflection": "Fase de consolidación. Has dominado la repetición y el manejo de colecciones de datos.",
+        "tts_intro": "Mira cómo crecí. Los bucles y las listas ya no nos detienen."
     },
     "senior": {
-        "name": "Pinguino Senior",
+        "name": "Pingüino Senior",
         "stage_level": 4,
         "image_file": "senior.png",
         "image_path": "/static/img/mascota/senior.png",
-        "description": "Un pinguino elegante con lentes de lectura que domina la definicion de funciones y la reutilizacion de codigo.",
+        "description": "Un pingüino elegante con lentes de lectura que domina la definición de funciones y la reutilización de código.",
         "required_points": 90,
-        "norman_reflection": "Fase de abstraccion. Sabes crear funciones limpias y resolver problemas complejos.",
-        "tts_intro": "Nos hemos vuelto un equipo muy eficiente. Tu codigo ahora es ordenado y modular."
+        "norman_reflection": "Fase de abstracción. Sabes crear funciones limpias y resolver problemas complejos.",
+        "tts_intro": "Nos hemos vuelto un equipo muy eficiente. Tu código ahora es ordenado y modular."
     },
     "sabio": {
-        "name": "Pinguino Sabio",
+        "name": "Pingüino Sabio",
         "stage_level": 5,
         "image_file": "sabio.png",
         "image_path": "/static/img/mascota/sabio.png",
-        "description": "Un venerable pinguino con capa de graduado y baston de hielo que ayuda a otros companeros en las salas colaborativas.",
+        "description": "Un venerable pingüino con capa de graduado y bastón de hielo que ayuda a otros compañeros en las salas colaborativas.",
         "required_points": 140,
-        "norman_reflection": "Fase de maestria. Tienes la base solida para aprender cualquier otro lenguaje y guiar a otros.",
+        "norman_reflection": "Fase de maestría. Tienes la base sólida para aprender cualquier otro lenguaje y guiar a otros.",
         "tts_intro": "Llegamos a la cumbre. Eres capaz de pensar como programador y encontrar soluciones por tu cuenta."
     }
 }
@@ -81,16 +81,16 @@ class VirtualPet:
         if success:
             self.mood = "entusiasmado"
             self.energy = min(100, self.energy + 10)
-            message = "Tu pinguino salta de alegria y festeja tu solucion."
-            tts_text = "Bien hecho. Tu solucion funciono correctamente."
+            message = "Tu pingüino salta de alegría y festeja tu solución."
+            tts_text = "Bien hecho. Tu solución funcionó correctamente."
         elif consecutive_errors >= 3:
             self.mood = "solidario"
             self.energy = max(30, self.energy - 5)
-            message = "Tu pinguino te ofrece un vaso de agua fria y sugiere respirar hondo antes de la siguiente prueba."
+            message = "Tu pingüino te ofrece un vaso de agua fría y sugiere respirar hondo antes de la siguiente prueba."
             tts_text = "No te preocupes. Respira hondo, analicemos el problema juntos."
         else:
             self.mood = "atento"
-            message = "Tu pinguino mira fijamente el editor con curiosidad."
+            message = "Tu pingüino mira fijamente el editor con curiosidad."
             tts_text = "Sigamos intentando. Estamos muy cerca."
 
         stage_data = PET_STAGES[self.stage]

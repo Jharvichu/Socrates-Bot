@@ -9,13 +9,13 @@ class RoomManager:
         self.active_rooms: Dict[str, List[WebSocket]] = {}
         # Estado compartido de codigo por sala
         self.room_code: Dict[str, str] = {
-            "sala-1": "# Sala de estudio colaborativa 1\n# Puedes escribir o dictar codigo aqui junto a tus companeros\n",
+            "sala-1": "# Sala de estudio colaborativa 1\n# Puedes escribir o dictar código aquí junto a tus compañeros\n",
             "sala-2": "# Sala de estudio colaborativa 2\n"
         }
         # Registro de participantes y mascotas por sala
         self.room_members: Dict[str, List[dict]] = {
             "sala-1": [
-                {"name": "Companero Bot", "pet_stage": "aprendiz", "role": "par"}
+                {"name": "Compañero Bot", "pet_stage": "aprendiz", "role": "par"}
             ],
             "sala-2": []
         }
