@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Socrates Bot - Asistente Socratico de Programacion en Python</title>
+  <title>Sócrates Bot - Asistente Socrático de Programación en Python</title>
   <link rel="manifest" href="/static/manifest.json">
   <meta name="theme-color" content="#1e3a8a">
   <link rel="stylesheet" href="/static/css/styles.css">
@@ -15,10 +15,10 @@
 
   <!-- Barra de navegacion superior -->
   <header class="navbar" role="banner">
-    <a href="#" class="brand-title" onclick="window.socratesApp.navigateTo('screen-p1')">Socrates Bot</a>
-    <nav role="navigation" aria-label="Navegacion principal">
+    <a href="#" class="brand-title" onclick="window.socratesApp.navigateTo('screen-p1')">Sócrates Bot</a>
+    <nav role="navigation" aria-label="Navegación principal">
       <ul class="nav-links">
-        <li><button class="nav-btn active" data-target="screen-p1">1. Calibracion</button></li>
+        <li><button class="nav-btn active" data-target="screen-p1">1. Calibración</button></li>
         <li><button class="nav-btn" data-target="screen-p2">2. Mapa de Temas</button></li>
         <li><button class="nav-btn" data-target="screen-p3">3. Laboratorio</button></li>
         <li><button class="nav-btn" data-target="screen-p4">4. Mascota</button></li>
@@ -31,8 +31,8 @@
   <!-- Barra de estado y controles rapidos de accesibilidad -->
   <aside class="status-bar" aria-label="Herramientas de accesibilidad y estado">
     <div style="display:flex; align-items:center; gap:0.5rem;">
-      <button id="toggle-mic-btn" class="btn btn-secondary" style="min-height:36px; padding:0.4rem 0.8rem;" aria-label="Activar o desactivar microfono">
-        Microfono
+      <button id="toggle-mic-btn" class="btn btn-secondary" style="min-height:36px; padding:0.4rem 0.8rem;" aria-label="Activar o desactivar micrófono">
+        Micrófono
       </button>
       <span id="voice-status-badge" class="voice-badge">Voz en espera</span>
     </div>
@@ -44,10 +44,10 @@
         Tamaño Letra
       </button>
       <label for="tts-speed-select" style="font-size:0.85rem; font-weight:600;">Voz TTS:</label>
-      <select id="tts-speed-select" class="form-select" style="width:auto; min-height:36px; padding:0.2rem 0.5rem;" aria-label="Velocidad de narracion por voz">
+      <select id="tts-speed-select" class="form-select" style="width:auto; min-height:36px; padding:0.2rem 0.5rem;" aria-label="Velocidad de narración por voz">
         <option value="0.85">0.85x (Pausado)</option>
         <option value="1.0" selected>1.0x (Normal)</option>
-        <option value="1.25">1.25x (Agil)</option>
+        <option value="1.25">1.25x (Ágil)</option>
       </select>
     </div>
   </aside>
@@ -58,31 +58,35 @@
     <!-- Pantalla P1: Onboarding y Calibracion de Accesibilidad -->
     <section id="screen-p1" class="screen-view active" aria-labelledby="title-p1">
       <div class="card">
-        <h1 id="title-p1" class="card-title">Bienvenido a Socrates Bot</h1>
+        <h1 id="title-p1" class="card-title">Bienvenido a Sócrates Bot</h1>
         <p style="margin-bottom:1rem; color:var(--text-muted);">
-          Tu asistente interactivo para aprender programacion en Python mediante preguntas guia, acompanado de tu propia mascota virtual pingüino.
+          Tu asistente interactivo para aprender programación en Python mediante preguntas guía, acompañado de tu propia mascota virtual pingüino.
         </p>
 
         <div class="grid-2col">
           <div>
             <h2 style="font-size:1.1rem; margin-bottom:0.75rem;">Configura tu experiencia de aprendizaje</h2>
             <div class="form-group">
-              <label for="calib-profile-type" class="form-label">Perfil de interaccion prioritario:</label>
+              <label for="calib-profile-type" class="form-label">Perfil de interacción prioritario:</label>
               <select id="calib-profile-type" class="form-select">
-                <option value="estandar">Estandar (Teclado, raton y voz opcional)</option>
-                <option value="motora">Discapacidad motora (Control 100% por voz / manos libres)</option>
-                <option value="visual">Discapacidad visual (Lector de pantalla y sintesis de voz completa)</option>
+                <option value="estandar">Estándar (teclado, ratón y voz opcional)</option>
+                <option value="motora">Discapacidad motora (control 100% por voz / manos libres)</option>
+                <option value="visual">Discapacidad visual (lector de pantalla y síntesis de voz completa)</option>
               </select>
             </div>
 
             <div class="form-group">
-              <label class="form-label">Comandos basicos por voz que puedes pronunciar:</label>
-              <ul style="margin-left:1.25rem; font-size:0.95rem; line-height:1.6;">
-                <li><strong>"Ir al mapa"</strong>: Abre el arbol de temas de Python.</li>
-                <li><strong>"Ir al laboratorio"</strong>: Abre el editor de codigo y chat.</li>
-                <li><strong>"Ejecutar codigo"</strong>: Prueba tu solucion en el sandbox.</li>
-                <li><strong>"Dame pista"</strong>: Solicita orientacion socratica a Socrates.</li>
-                <li><strong>"Ver mascota"</strong>: Visita el santuario de tu pinguino.</li>
+              <h3 class="form-label" id="voice-commands-title">Comandos de voz (pulsa «Micrófono» y habla con naturalidad):</h3>
+              <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.5rem;">
+                No necesitas frases exactas: entiendo sinónimos como «corre el programa» o «no entiendo». Funciona en Chrome y Edge.
+              </p>
+              <ul aria-labelledby="voice-commands-title" style="margin-left:1.25rem; font-size:0.95rem; line-height:1.7;">
+                <li><strong>Navegar:</strong> «Llévame al laboratorio», «Ir al mapa», «Ver mi mascota», «Entrar a la sala dos», «Volver».</li>
+                <li><strong>Laboratorio:</strong> «Ejecutar código», «Dame una pista», «Lee mi código», «Lee el resultado», «Ejercicio tres».</li>
+                <li><strong>Dictar código:</strong> «Escribe variable edad igual a 15», «Escribe si edad mayor que 18», «Escribe imprimir hola mundo», «Modo dictado».</li>
+                <li><strong>Editar:</strong> «Deshacer», «Borrar última línea», «Salir del bloque».</li>
+                <li><strong>Accesibilidad:</strong> «Más rápido», «Más lento», «Alto contraste», «Letra más grande», «Silencio».</li>
+                <li><strong>Ayuda:</strong> «¿Qué puedo decir?» lee los comandos de la pantalla en la que estás.</li>
               </ul>
             </div>
 
@@ -92,10 +96,10 @@
           </div>
 
           <div style="text-align:center; background:var(--bg-panel); padding:1.25rem; border-radius:6px; border:1px solid var(--border-color);">
-            <h3 style="font-size:1.05rem; margin-bottom:0.5rem;">Tu companero de viaje inicial</h3>
-            <img src="/static/img/mascota/huevo.png" alt="Huevo de pinguino con bufanda" style="max-width:180px; height:auto; margin:0.5rem auto; border-radius:6px; display:block;">
+            <h3 style="font-size:1.05rem; margin-bottom:0.5rem;">Tu compañero de viaje inicial</h3>
+            <img src="/static/img/mascota/huevo.png" alt="Huevo de pingüino con bufanda" style="max-width:180px; height:auto; margin:0.5rem auto; border-radius:6px; display:block;">
             <p style="font-size:0.9rem; color:var(--text-muted); margin-top:0.5rem;">
-              Este es tu huevo de pinguino. Cada vez que resuelvas retos en Python ira absorbiendo conocimientos hasta evolucionar a Aprendiz, Junior, Senior y Sabio.
+              Este es tu huevo de pingüino. Cada vez que resuelvas retos en Python irá absorbiendo conocimientos hasta evolucionar a Aprendiz, Junior, Senior y Sabio.
             </p>
           </div>
         </div>
@@ -107,7 +111,7 @@
       <div class="card">
         <h1 id="title-p2" class="card-title">Mapa de Habilidades en Python</h1>
         <p style="color:var(--text-muted);">
-          Selecciona un ejercicio para resolverlo paso a paso. Recuerda que puedes decir por voz <strong>"Ir al laboratorio"</strong> o hacer clic en el boton del ejercicio.
+          Selecciona un ejercicio para resolverlo paso a paso. Por voz puedes decir <strong>«Ejercicio tres»</strong> o <strong>«Siguiente ejercicio»</strong>, o hacer clic en el botón del ejercicio.
         </p>
         <div id="topics-tree-container" class="topics-grid">
           <!-- Tarjetas de ejercicios inyectadas dinamicamente -->
@@ -122,23 +126,23 @@
         <!-- Panel Izquierdo Afectivo: Mascota y Tutor Socratico -->
         <div class="pet-panel">
           <div class="pet-card">
-            <h2 id="workspace-pet-stage" style="font-size:1.15rem; font-weight:700;">Huevo de Pinguino</h2>
-            <img id="workspace-pet-img" src="/static/img/mascota/huevo.png" alt="Mascota virtual pinguino" class="pet-image">
-            <div id="workspace-pet-mood" style="font-size:0.9rem; font-weight:600; color:var(--accent-color);">Estado de animo: Curioso</div>
+            <h2 id="workspace-pet-stage" style="font-size:1.15rem; font-weight:700;">Huevo de Pingüino</h2>
+            <img id="workspace-pet-img" src="/static/img/mascota/huevo.png" alt="Mascota virtual pingüino" class="pet-image">
+            <div id="workspace-pet-mood" style="font-size:0.9rem; font-weight:600; color:var(--accent-color);">Estado de ánimo: Curioso</div>
             <p id="workspace-pet-desc" style="font-size:0.85rem; color:var(--text-muted); margin-top:0.35rem;">
-              Tu pinguino reacciona a tus intentos de solucion y te acompana sin juzgarte.
+              Tu pingüino reacciona a tus intentos de solución y te acompaña sin juzgarte.
             </p>
           </div>
 
           <div class="card" style="margin-bottom:0; display:flex; flex-direction:column; gap:0.5rem;">
-            <h3 style="font-size:1rem; font-weight:700;">Orientacion de Socrates</h3>
-            <div id="socratic-chat" class="socratic-chat-box" role="region" aria-label="Historial de orientacion socratica" aria-live="polite">
+            <h3 style="font-size:1rem; font-weight:700;">Orientación de Sócrates</h3>
+            <div id="socratic-chat" class="socratic-chat-box" role="region" aria-label="Historial de orientación socrática" aria-live="polite">
               <div class="chat-bubble socrates">
-                Hola. Lee con atencion el reto. Cuando escribas tu codigo, ejecutalo para probarlo o pideme una pista si algo no queda claro.
+                Hola. Lee con atención el reto. Cuando escribas tu código, ejecútalo para probarlo o pídeme una pista si algo no queda claro.
               </div>
             </div>
             <button class="btn btn-accent" style="width:100%;" onclick="window.socratesApp.requestSocraticHint()">
-              Pedir Pista Socratica
+              Pedir Pista Socrática
             </button>
           </div>
         </div>
@@ -146,20 +150,20 @@
         <!-- Panel Derecho: Editor y Consola de Ejecucion -->
         <div class="code-editor-area">
           <div class="card" style="margin-bottom:0.75rem;">
-            <h1 id="current-exercise-title" style="font-size:1.2rem; margin-bottom:0.35rem;">Ejercicio 1: Variables y Presentacion</h1>
+            <h1 id="current-exercise-title" style="font-size:1.2rem; margin-bottom:0.35rem;">Ejercicio 1: Variables y Presentación</h1>
             <p id="current-exercise-prompt" style="font-size:0.95rem; color:var(--text-muted);">
               Crea una variable llamada nombre con tu nombre y luego usa print para mostrar un saludo.
             </p>
           </div>
 
           <div>
-            <label for="code-editor" class="form-label">Editor de codigo Python (Usa Tab para sangria de 4 espacios):</label>
-            <textarea id="code-editor" class="code-textarea" spellcheck="false" aria-label="Editor de codigo Python"></textarea>
+            <label for="code-editor" class="form-label">Editor de código Python (usa Tab para sangría de 4 espacios):</label>
+            <textarea id="code-editor" class="code-textarea" spellcheck="false" aria-label="Editor de código Python"></textarea>
           </div>
 
           <div class="editor-actions">
-            <button class="btn btn-success" onclick="window.socratesApp.runCode()" aria-label="Ejecutar codigo en el sandbox">
-              Ejecutar Codigo
+            <button class="btn btn-success" onclick="window.socratesApp.runCode()" aria-label="Ejecutar código en el sandbox">
+              Ejecutar Código
             </button>
             <button class="btn btn-secondary" onclick="window.codeEditorHelper.clear()" aria-label="Limpiar editor">
               Limpiar
@@ -170,9 +174,9 @@
           </div>
 
           <div>
-            <label for="console-output" class="form-label">Salida de la consola (Sandbox Python con limite de 2 segundos):</label>
+            <label for="console-output" class="form-label">Salida de la consola (sandbox Python con límite de 2 segundos):</label>
             <div id="console-output" class="console-output" role="region" aria-live="polite" aria-label="Salida de consola">
-              Presiona 'Ejecutar Codigo' o di 'Ejecutar codigo' por voz para ver el resultado aqui.
+              Presiona «Ejecutar Código» o di «Ejecutar código» por voz para ver el resultado aquí.
             </div>
           </div>
         </div>
@@ -182,52 +186,55 @@
       <!-- Barra inferior permanente de comandos por voz -->
       <footer class="voice-command-bar" aria-label="Comandos de voz recomendados">
         <strong>Comandos disponibles por voz:</strong>
-        <span class="voice-command-tag">"Ejecutar codigo"</span>
-        <span class="voice-command-tag">"Dame pista"</span>
-        <span class="voice-command-tag">"Ir al mapa"</span>
-        <span class="voice-command-tag">"Ver mascota"</span>
-        <span class="voice-command-tag">"Sala colaborativa"</span>
-        <span class="voice-command-tag">"Escribir imprimir Hola Mundo"</span>
+        <span class="voice-command-tag">"Ejecutar código"</span>
+        <span class="voice-command-tag">"Dame una pista"</span>
+        <span class="voice-command-tag">"Lee mi código"</span>
+        <span class="voice-command-tag">"Lee el resultado"</span>
+        <span class="voice-command-tag">"Escribe variable x igual a 5"</span>
+        <span class="voice-command-tag">"Escribe imprimir hola mundo"</span>
+        <span class="voice-command-tag">"Deshacer"</span>
+        <span class="voice-command-tag">"Siguiente ejercicio"</span>
+        <span class="voice-command-tag">"¿Qué puedo decir?"</span>
       </footer>
     </section>
 
     <!-- Pantalla P4: Santuario de la Mascota Evolutiva -->
     <section id="screen-p4" class="screen-view" aria-labelledby="title-p4">
       <div class="card">
-        <h1 id="title-p4" class="card-title">Santuario del Pinguino Evolutivo</h1>
+        <h1 id="title-p4" class="card-title">Santuario del Pingüino Evolutivo</h1>
         <p style="color:var(--text-muted);">
-          A traves de la metodologia socratica, cada concepto asimilado impulsa la maduracion de tu companero a traves de 5 fases continuas.
+          A través de la metodología socrática, cada concepto asimilado impulsa la maduración de tu compañero a lo largo de 5 fases continuas.
         </p>
 
         <div class="stages-gallery">
           <div class="stage-card current" data-stage="huevo">
-            <img src="/static/img/mascota/huevo.png" alt="Huevo de Pinguino">
+            <img src="/static/img/mascota/huevo.png" alt="Huevo de pingüino">
             <h2 style="font-size:1.05rem; font-weight:700;">1. Huevo</h2>
             <p style="font-size:0.85rem; color:var(--text-muted);">Fase de descubrimiento y primeros pasos (0 a 19 puntos).</p>
           </div>
 
           <div class="stage-card" data-stage="aprendiz">
-            <img src="/static/img/mascota/aprendiz.png" alt="Pinguino Aprendiz">
+            <img src="/static/img/mascota/aprendiz.png" alt="Pingüino Aprendiz">
             <h2 style="font-size:1.05rem; font-weight:700;">2. Aprendiz</h2>
-            <p style="font-size:0.85rem; color:var(--text-muted);">Sale del cascaron, domina variables y condicionales (20 a 49 puntos).</p>
+            <p style="font-size:0.85rem; color:var(--text-muted);">Sale del cascarón, domina variables y condicionales (20 a 49 puntos).</p>
           </div>
 
           <div class="stage-card" data-stage="junior">
-            <img src="/static/img/mascota/junior.png" alt="Pinguino Junior">
+            <img src="/static/img/mascota/junior.png" alt="Pingüino Junior">
             <h2 style="font-size:1.05rem; font-weight:700;">3. Junior</h2>
-            <p style="font-size:0.85rem; color:var(--text-muted);">Lleva audifonos y domina bucles y listas (50 a 89 puntos).</p>
+            <p style="font-size:0.85rem; color:var(--text-muted);">Lleva audífonos y domina bucles y listas (50 a 89 puntos).</p>
           </div>
 
           <div class="stage-card" data-stage="senior">
-            <img src="/static/img/mascota/senior.png" alt="Pinguino Senior">
+            <img src="/static/img/mascota/senior.png" alt="Pingüino Senior">
             <h2 style="font-size:1.05rem; font-weight:700;">4. Senior</h2>
             <p style="font-size:0.85rem; color:var(--text-muted);">Lleva lentes de lectura y domina funciones modulares (90 a 139 puntos).</p>
           </div>
 
           <div class="stage-card" data-stage="sabio">
-            <img src="/static/img/mascota/sabio.png" alt="Pinguino Sabio">
+            <img src="/static/img/mascota/sabio.png" alt="Pingüino Sabio">
             <h2 style="font-size:1.05rem; font-weight:700;">5. Sabio</h2>
-            <p style="font-size:0.85rem; color:var(--text-muted);">Pinguino graduado con baston, ayuda a la comunidad (140+ puntos).</p>
+            <p style="font-size:0.85rem; color:var(--text-muted);">Pingüino graduado con bastón, ayuda a la comunidad (140+ puntos).</p>
           </div>
         </div>
       </div>
@@ -238,12 +245,12 @@
       <div class="card">
         <h1 id="title-p5" class="card-title">Sala de Estudio Colaborativa</h1>
         <p style="color:var(--text-muted); margin-bottom:1rem;">
-          Trabaja en equipo con companeros de clase.
+          Trabaja en equipo con compañeros de clase. Por voz puedes decir «Entrar a la sala dos».
         </p>
 
         <div class="room-layout">
           <div>
-            <label for="shared-code-editor" class="form-label">Pizarra compartida de codigo en tiempo real:</label>
+            <label for="shared-code-editor" class="form-label">Pizarra compartida de código en tiempo real:</label>
             <textarea id="shared-code-editor" class="code-textarea" style="height:320px;" spellcheck="false"></textarea>
           </div>
 
@@ -255,7 +262,7 @@
               </ul>
             </div>
             <p style="font-size:0.85rem; color:var(--text-muted);">
-              Puedes visitar las salas creadas por tus companeros y compartir la evolucion de sus mascotas.
+              Puedes visitar las salas creadas por tus compañeros y compartir la evolución de sus mascotas.
             </p>
           </div>
         </div>
@@ -267,7 +274,7 @@
       <div class="card">
         <h1 id="title-p6" class="card-title">Dashboard Docente de Aprendizaje</h1>
         <p style="color:var(--text-muted); margin-bottom:1.25rem;">
-          Monitoreo en tiempo real del progreso grupal, deteccion temprana de bloqueos y mapa de calor de dificultades.
+          Monitoreo en tiempo real del progreso grupal, detección temprana de bloqueos y mapa de calor de dificultades.
         </p>
 
         <div class="metrics-row">
@@ -298,7 +305,7 @@
               <th>Puntos</th>
               <th>Fase Mascota</th>
               <th>Estado Emocional</th>
-              <th>Situacion</th>
+              <th>Situación</th>
             </tr>
           </thead>
           <tbody id="dashboard-students-body">
