@@ -2,12 +2,12 @@
   "default_user": {
     "user_id": "default_user",
     "display_name": "Estudiante Explorador",
-    "profile_type": "estandar",
+    "profile_type": "visual",
     "accessibility": {
       "screen_reader_optimized": false,
       "hands_free_voice": true,
       "high_contrast": false,
-      "tts_speed": 1.0,
+      "tts_speed": 1,
       "font_scale": 1.0
     },
     "progress": {
@@ -16,8 +16,8 @@
         "ej-01",
         "ej-02"
       ],
-      "consecutive_errors": 1,
-      "total_attempts": 20,
+      "consecutive_errors": 0,
+      "total_attempts": 23,
       "errors_by_topic": {
         "variables": 3,
         "condicionales": 0,
@@ -26,9 +26,9 @@
       }
     },
     "affective_state": {
-      "inferred_emotion": "reflexivo",
-      "frustration_level": 35,
-      "motivation_level": 90
+      "inferred_emotion": "entusiasmado",
+      "frustration_level": 0,
+      "motivation_level": 100
     },
     "pet_stage": "aprendiz"
   }
