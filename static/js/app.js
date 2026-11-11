@@ -363,7 +363,7 @@ class SocratesApp {
       petStageText.textContent = stageNames[stageKey] || stageKey;
     }
     if (petData) {
-      if (petMoodText) petMoodText.textContent = `Estado de ánimo: ${petData.mood}`;
+      if (petMoodText) petMoodText.textContent = `Estado de ánimo: ${this.capitalize(petData.mood)}`;
       if (petDescText) petDescText.textContent = petData.norman_reflection || petData.description;
     }
 
