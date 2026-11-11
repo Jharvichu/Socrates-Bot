@@ -363,7 +363,7 @@ class SocratesApp {
       petStageText.textContent = stageNames[stageKey] || stageKey;
     }
     if (petData) {
-      if (petMoodText) petMoodText.textContent = `Estado de ánimo: ${petData.mood}`;
+      if (petMoodText) petMoodText.textContent = `Estado de ánimo: ${this.capitalize(petData.mood)}`;
       if (petDescText) petDescText.textContent = petData.norman_reflection || petData.description;
     }
 
@@ -430,7 +430,7 @@ class SocratesApp {
       li.innerHTML = `
         <span><strong>${m.name}</strong> (${m.role})</span>
         <span style="font-size:0.85rem; background:#e2e8f0; padding:0.2rem 0.5rem; border-radius:3px;">
-          Pinguino ${m.pet_stage}
+          Pingüino ${this.capitalize(m.pet_stage)}
         </span>
       `;
       listEl.appendChild(li);

@@ -283,22 +283,25 @@ class VoiceInterface {
       for (const c of candidates) {
         if (this.tryCommands(this.dictationSafeCommands, c)) return;
       }
-      this.dictate(candidates[0]);
+      this.dictate(candidates);
       return;
     }
 
     // 2) Dictado con prefijo: "escribe ...", "dicta ...", "agrega ..."
+    const prefixRe = /^(escribir|escribe|escribo|escriba|dictar|dicta|agregar|agrega|anadir|anade|insertar|inserta)(?: (.+))?$/;
+    const dictationCandidates = [];
     for (const c of candidates) {
-      const m = c.t.match(/^(escribir|escribe|escriba|dictar|dicta|agregar|agrega|anadir|anade|insertar|inserta)(?: (.+))?$/);
-      if (m) {
-        if (!m[2]) {
-          this.setDictationMode(true);
-        } else {
-          const rest = m[2];
-          this.dictate({ raw: c.raw, t: rest });
-        }
-        return;
+      const m = c.t.match(prefixRe);
+      if (m) dictationCandidates.push({ raw: c.raw, t: m[2] || "" });
+    }
+    if (dictationCandidates.length) {
+      const withContent = dictationCandidates.filter((c) => c.t);
+      if (!withContent.length) {
+        this.setDictationMode(true);
+      } else {
+        this.dictate(withContent);
       }
+      return;
     }
 
     // 3) Comandos generales, probando cada alternativa del reconocedor
@@ -739,12 +742,25 @@ class VoiceInterface {
     this.confirm(`Borré: ${this.speakableCode(removed)}`);
   }
 
-  dictate(c) {
+  // Elige, entre las alternativas del reconocedor, la que forma una instruccion reconocible.
+  // Ej.: prefiere "si edad es mayor a 18" (if) sobre "ciudad es mayor a 18" (expresion suelta).
+  pickDictationResult(candidates) {
+    const score = (r) => (!r ? -1 : r.command ? 3 : r.fallback ? 0 : 2);
+    let best = null;
+    for (const c of candidates) {
+      const result = this.toPython(c);
+      if (!best || score(result) > score(best)) best = result;
+      if (score(result) >= 2) break; // la primera alternativa estructurada gana
+    }
+    return best;
+  }
+
+  dictate(candidates) {
     this.ensureLab();
     const editor = this.getEditor();
     if (!editor) return;
 
-    const result = this.toPython(c);
+    const result = this.pickDictationResult(Array.isArray(candidates) ? candidates : [candidates]);
     if (!result) {
       this.playEarcon("error");
       this.speak("No pude convertir eso en código. Intenta de nuevo.");
@@ -1002,7 +1018,7 @@ class VoiceInterface {
     }
 
     const expr = this.toPythonExpr(t, raw);
-    return expr ? { code: expr } : null;
+    return expr ? { code: expr, fallback: true } : null;
   }
 
   // ---------------------------------------------------------------------------
